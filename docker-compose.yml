@@ -1,0 +1,49 @@
+services:
+  flowerShop_db:
+    image: postgres:13
+    secrets:
+      - pg-password
+    environment:
+      - POSTGRES_DB=flowerShop
+      - POSTGRES_PASSWORD_FILE=/run/secrets/pg-password
+      - POSTGRES_USER=flowerShop
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    #    restart: always
+    volumes:
+      - flowerShopDb:/var/lib/postgresql/data/pgdata
+    networks:
+      flowerShopNet:
+        ipv4_address: 172.32.0.2
+
+  pgadmin:
+    image: dpage/pgadmin4
+    #    restart: always
+    depends_on:
+      - flowerShop_db
+    secrets:
+      - pgadmin-password
+    ports:
+      - 5000:80
+    volumes:
+      - flowerShop-pgadmin:/var/lib/pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=njcocosa@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD_FILE=/run/secrets/pgadmin-password
+    networks:
+      - flowerShopNet
+
+secrets:
+  pgadmin-password:
+    file: db/pg_password.txt
+  pg-password:
+    file: db/pg_password.txt
+
+volumes:
+  flowerShopDb:
+  flowerShop-pgadmin:
+
+networks:
+  flowerShopNet:
+    ipam:
+      config:
+        - subnet: 172.32.0.0/16
