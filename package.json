@@ -5,7 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "migrate:up": "npx sequelize-cli db:migrate --name",
+    "migrate:undo": "npx sequelize-cli db:migrate:undo --name",
+    "migrate:undo:all": "npx sequelize-cli db:migrate:undo:all",
+    "db:drop": "npx sequelize-cli db:drop",
+    "db:seed:gen": "npx sequelize-cli seed:generate --name",
+    "db:seed": "npx sequelize-cli db:seed --seed",
+    "db:seed:all": "npx sequelize-cli db:seed:all",
+    "db:seed:undo": "npx sequelize-cli db:seed:undo",
+
+    "createTable": "npx sequelize-cli model:generate --name <enter_name_here> --attributes <enter_attributes_here>"
+
   },
   "author": "",
   "license": "ISC",
