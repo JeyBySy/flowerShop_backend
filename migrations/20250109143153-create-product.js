@@ -4,7 +4,6 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Products', {
       id: {
-        allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
@@ -24,8 +23,23 @@ module.exports = {
       imageUrl: {
         type: Sequelize.STRING
       },
-      category: {
-        type: Sequelize.STRING
+      categoryId: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: {
+          model: 'Categories', // Reference to the Categories table
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+      },
+      subCategoryId: {
+        type: Sequelize.UUID,
+        allowNull: true,
+        references: {
+          model: 'SubCategories', // Reference to the SubCategories table
+          key: 'id',
+        },
+        onDelete: 'SET NULL',
       },
       createdAt: {
         allowNull: false,
