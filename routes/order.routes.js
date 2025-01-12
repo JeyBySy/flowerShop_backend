@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const OrderController = require('../controllers/orderControllers');
+const OrderController = require('../controllers/order.controllers');
 
 // Routes for Order CRUD operations
 router.route('/')
