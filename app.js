@@ -9,7 +9,7 @@ const { json, urlencoded } = require('express');
 // const authRoutes = require('./routes/authRoutes');
 // const userRoutes = require('./routes/userRoutes');
 // const errorHandler = require('./middleware/errorHandler');
-const productRoutes = require('./routes/productRoutes');
+const productRoutes = require('./routes/product.routes');
 
 const app = express();
 
